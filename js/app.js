@@ -1,26 +1,22 @@
+const container = document.querySelector(".container");
+const resultado = document.querySelector("#resultado");
+const formulario = document.querySelector("#formulario");
 
-const container = document.querySelector('.container');
-const resultado = document.querySelector('#resultado');
-const formulario = document.querySelector('#formulario');
-
-window.addEventListener('load', () => {
-  formulario.addEventListener('submit', buscarClima);
-})
-
-
-
+window.addEventListener("load", () => {
+  formulario.addEventListener("submit", buscarClima);
+});
 
 function buscarClima(e) {
   e.preventDefault();
-  const ciudad = document.querySelector('#ciudad').value
-  const pais = document.querySelector('#pais').value
+  const ciudad = document.querySelector("#ciudad").value;
+  const pais = document.querySelector("#pais").value;
 
   console.log(ciudad);
   console.log(pais);
 
-  if (ciudad === '' || pais === '') {
+  if (ciudad === "" || pais === "") {
     // Hubo un error
-    mostrarError('Ambos campos son obligatorios')
+    mostrarError("Ambos campos son obligatorios");
 
     return;
   }
@@ -28,11 +24,23 @@ function buscarClima(e) {
 }
 
 function mostrarError(mensaje) {
-  const alerta = document.querySelector('.bg-red-100');
+  const alerta = document.querySelector(".bg-red-100");
   if (!alerta) {
-    const alerta = document.createElement('div');
+    const alerta = document.createElement("div");
 
-    alerta.classList.add('bg-red-100', "border-red-400", "text-red-700", "px-4", "py-3", "rounded", "relative", "max-w-md", "mx-auto", "mt-6", "text-center");
+    alerta.classList.add(
+      "bg-red-100",
+      "border-red-400",
+      "text-red-700",
+      "px-4",
+      "py-3",
+      "rounded",
+      "relative",
+      "max-w-md",
+      "mx-auto",
+      "mt-6",
+      "text-center"
+    );
 
     alerta.innerHTML = `
           <strong class="font-bold">Error!</strong>
@@ -50,67 +58,77 @@ function consultarAPI(ciudad, pais) {
   // Consultar la API e imprimir el Resultado...
 
   // leer la url  y agregar el API key
-  const appId = '31b33df22fe2b492d9b74843003438fe';
+  const appId = "31b33df22fe2b492d9b74843003438fe";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
   Spinner();
 
   // query con fetch api
   fetch(url)
-    .then(respuesta => {
+    .then((respuesta) => {
       return respuesta.json();
     })
-    .then(datos => {
+    .then((datos) => {
       console.log(datos);
       limpiarHTML();
       if (datos.cod === "404") {
-        mostrarError('Ciudad No Encontrada')
+        mostrarError("Ciudad No Encontrada");
       } else {
-        mostrarClima(datos)
+        mostrarClima(datos);
       }
     })
-    .catch(error => {
-      console.log(error)
+    .catch((error) => {
+      console.log(error);
     });
 }
 
 function mostrarClima(datos) {
-
   // Formatear el Clima...
 
-  const { name, main: { temp, temp_max, temp_min } } = datos;
-
+  const {
+    name,
+    main: { temp, temp_max, temp_min },
+  } = datos;
 
   const grados = KelvinACentigrados(temp);
   const min = KelvinACentigrados(temp_max);
   const max = KelvinACentigrados(temp_min);
 
-  const nombreCiudad = document.createElement('p');
+  const nombreCiudad = document.createElement("p");
   nombreCiudad.innerHTML = `Clima en: ${name}`;
-  nombreCiudad.classList.add('font-bold', 'text-2xl')
+  nombreCiudad.classList.add("font-bold", "text-2xl");
 
-  const actual = document.createElement('p');
+  const actual = document.createElement("p");
   actual.innerHTML = `${grados} &#8451;`;
-  actual.classList.add('font-bold', 'text-6xl')
+  actual.classList.add("font-bold", "text-6xl");
 
-  const tempMaxima = document.createElement('p');
+  const tempMaxima = document.createElement("p");
   tempMaxima.innerHTML = `Max: ${max} &#8451;`;
-  tempMaxima.classList.add('text-xl')
+  tempMaxima.classList.add("text-xl");
 
-
-  const tempMinima = document.createElement('p');
+  const tempMinima = document.createElement("p");
   tempMinima.innerHTML = `Min: ${min} &#8451;`;
-  tempMinima.classList.add('text-xl')
+  tempMinima.classList.add("text-xl");
 
-
-  const resultadoDiv = document.createElement('div');
-  resultadoDiv.classList.add('text-center', 'text-white')
+  const resultadoDiv = document.createElement("div");
+  resultadoDiv.classList.add("text-center", "text-white");
   resultadoDiv.appendChild(nombreCiudad);
   resultadoDiv.appendChild(actual);
   resultadoDiv.appendChild(tempMaxima);
   resultadoDiv.appendChild(tempMinima);
 
-  resultado.appendChild(resultadoDiv)
+  resultado.appendChild(resultadoDiv);
+  let tempGrados = parseInt(temp - 273.15);
+
+  const body = document.getElementById("body");
+
+  if (tempGrados > 15) {
+    body.classList.remove("frio");
+    body.classList.add("caliente");
+  } else {
+    body.classList.add("frio");
+    body.classList.remove("caliente");
+  }
 }
 
 function KelvinACentigrados(grados) {
@@ -124,11 +142,10 @@ function limpiarHTML() {
 }
 
 function Spinner() {
-
   limpiarHTML();
 
-  const divSpinner = document.createElement('div');
-  divSpinner.classList.add('sk-fading-circle');
+  const divSpinner = document.createElement("div");
+  divSpinner.classList.add("sk-fading-circle");
 
   divSpinner.innerHTML = `
     <div class="sk-circle1 sk-circle"></div>
