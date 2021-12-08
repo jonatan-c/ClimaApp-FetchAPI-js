@@ -12,7 +12,7 @@
 - [x] Local.
 - [ ] Heroku.
 - [ ] AWS.
-- [ ] Netlify.
+- [x] Netlify: https://climaapp-fetchapi-js.netlify.app/
 - [x] None.
 
 ## <a name="table-of-contents"></a>Table of Contents
