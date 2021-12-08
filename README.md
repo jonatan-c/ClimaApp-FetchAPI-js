@@ -1,5 +1,66 @@
-### Aplicacion buscador del clima
+# Weather App
 
-Sencilla app que busca el clima de una ciudad y modifica el fondo segun sea el valor.
+### App to search for weather data
 
-[Clima App Web](https://climaapp-fetchapi-js.netlify.app/)
+## Area
+
+- [x] Frontend
+- [ ] Backend.
+
+## Deploy
+
+- [x] Local.
+- [ ] Heroku.
+- [ ] AWS.
+- [ ] Netlify.
+- [x] None.
+
+## <a name="table-of-contents"></a>Table of Contents
+
+- [Instalation](#installation)
+- [Documentation](#documentation)
+- [Images](#images)
+- [Technologies](#technologies)
+
+## <a name="installation"></a>Instalation:
+
+- Clone the repository or download
+- Open whith editor
+- Open Terminal
+
+## <a name="images"></a>Images:
+
+![Deploy](./readmeFiles/weatherApp.png)
+
+## <a name="technologies"></a>Technologies:
+
+- HTML
+- CSS
+- Javascript
+
+## Project management software
+
+- [ ] Trello:
+- [ ] Jira:
+- [x] None
+
+## Agile methodology
+
+- [ ] Scrum
+- [ ] Kanban
+- [x] Not applied
+
+## CI/CD
+
+- [ ] Applied
+- [x] Not applied
+
+## AWS(services)
+
+- [ ] Applied
+- [x] Not applied
+
+## Docker
+
+- [ ] Apllied
+- [x] Not applied
